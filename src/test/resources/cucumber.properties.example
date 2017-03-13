@@ -1,0 +1,4 @@
+kp.app.username = usr@acme.com
+kp.app.password = pwd
+kp.app.baseUrl = https://localhost:8080
+kp.app.authMethod = BASIC | JWT
