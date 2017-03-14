@@ -20,6 +20,7 @@ public class ResponseResults {
     private final ObjectMapper objectMapper;
     private final ClientHttpResponse theResponse;
     private final String body;
+    private Object latestObject;
 
     protected ResponseResults(final ClientHttpResponse response, final ObjectMapper objectMapper)
             throws IOException {
@@ -57,11 +58,17 @@ public class ResponseResults {
     public Object parseArray(Class<?> clazz) throws JsonParseException, JsonMappingException, IOException {
         ObjectMapper objectMapper = new ObjectMapper();
         ArrayType type = objectMapper.getTypeFactory().constructArrayType(clazz);
-        return objectMapper.readValue(getBody(), type);
+        latestObject = objectMapper.readValue(getBody(), type);
+        return latestObject;
     }
     
     public Object parseObject(Class<?> clazz) throws JsonParseException, JsonMappingException, IOException {
-        return objectMapper.readValue(getBody(), clazz);
+        latestObject = objectMapper.readValue(getBody(), clazz);
+        return latestObject;
+    }
+
+    public Object latestObject() {
+        return latestObject;
     }
 
 }
