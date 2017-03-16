@@ -13,12 +13,13 @@ public class UserMgmtStepDefs extends IntegrationTestSupport {
     
     @Given("^the server is available$")
     public void the_server_is_available() throws Throwable {
-         executeGet("/login").statusCodeIs(HttpStatus.OK);
+         executeGet("/").statusCodeIsAvailable();
     }
 
     @When("^a valid username and password are presented$")
     public void a_valid_username_and_password_are_presented() throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
+        // TODO add payload
+//        executePost("/auth/login");
         throw new PendingException();
     }
     

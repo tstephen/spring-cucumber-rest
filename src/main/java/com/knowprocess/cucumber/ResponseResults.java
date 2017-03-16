@@ -50,6 +50,16 @@ public class ResponseResults {
         return this;
     }
 
+    public boolean statusCodeIsAvailable() throws IOException {
+        return theResponse.getStatusCode().is2xxSuccessful()
+                || theResponse.getStatusCode().is3xxRedirection()
+                || theResponse.getStatusCode().is4xxClientError();
+    }
+
+    public boolean statusCodeIsSuccess() throws IOException {
+        return theResponse.getStatusCode().is2xxSuccessful();
+    }
+    
     public ResponseResults contentTypeIs(MediaType contentType) {
         assertEquals(contentType, theResponse.getHeaders().getContentType());
         return this;
