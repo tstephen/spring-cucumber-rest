@@ -59,10 +59,15 @@ public class ResponseResults {
     public boolean statusCodeIsSuccess() throws IOException {
         return theResponse.getStatusCode().is2xxSuccessful();
     }
-    
+
     public ResponseResults contentTypeIs(MediaType contentType) {
         assertEquals(contentType, theResponse.getHeaders().getContentType());
         return this;
+    }
+
+
+    public String location() {
+        return theResponse.getHeaders().getFirst("Location");
     }
 
     public Object parseArray(Class<?> clazz) throws JsonParseException, JsonMappingException, IOException {
@@ -71,7 +76,7 @@ public class ResponseResults {
         latestObject = objectMapper.readValue(getBody(), type);
         return latestObject;
     }
-    
+
     public Object parseObject(Class<?> clazz) throws JsonParseException, JsonMappingException, IOException {
         latestObject = objectMapper.readValue(getBody(), clazz);
         return latestObject;
@@ -80,5 +85,6 @@ public class ResponseResults {
     public Object latestObject() {
         return latestObject;
     }
+
 
 }
